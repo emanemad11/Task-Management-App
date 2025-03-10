@@ -1,4 +1,3 @@
-
 # 🚀 Task Management System
 
 A simple Laravel-based system to manage task assignments between admins and users, with real-time user task statistics.
@@ -47,6 +46,12 @@ cp .env.example .env
 
 - Set up your **Database connection** inside `.env`.
 
+- **Important:** Set the queue connection to `database`:
+
+```ini
+QUEUE_CONNECTION=database
+```
+
 ---
 
 ### 3. Run Setup and Tests
@@ -63,6 +68,18 @@ php artisan app:start
 # 3. Run Task feature tests
 php artisan test --filter TaskTest
 ```
+
+---
+
+## ⚠️ **Important Note about Queue Worker**
+
+- You **do not** need to run `php artisan queue:work` manually — it's already **included and started** automatically when running:
+
+```bash
+php artisan app:start
+```
+
+So **just run `php artisan app:start`**, and everything (migrations, seeders, and queue worker) will be set up and running automatically! 🚀
 
 ---
 
@@ -112,6 +129,6 @@ php artisan test --filter TaskTest
 
 ---
 
-## ⚠️ **Note**
+## ⚠️ **Final Note**
 
-- Make sure **queue worker** is running while creating tasks to ensure real-time statistics updates.
+- Ensure that the queue connection in `.env` is properly set to `database` to handle jobs automatically without manual queue worker command.
