@@ -128,7 +128,3 @@ So **just run `php artisan app:start`**, and everything (migrations, seeders, an
 - Laravel Queue (Database driver)  
 
 ---
-
-## ⚠️ **Final Note**
-
-- Ensure that the queue connection in `.env` is properly set to `database` to handle jobs automatically without manual queue worker command.
