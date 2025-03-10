@@ -1,30 +1,32 @@
+
 # 🚀 Task Management System
 
-A simple Laravel-based system to manage task assignment between admins and users, with real-time statistics for user tasks.
+A simple Laravel-based system to manage task assignments between admins and users, with real-time user task statistics.
 
-## 📑 Project Overview
+---
+
+## 📑 **Project Overview**
 
 - **Admins** can create and assign tasks to **users**.  
 - **Task list page** displays all created tasks (paginated).  
 - **Statistics page** shows **Top 10 users** with the highest number of assigned tasks.  
-- **Statistics** are automatically updated using background jobs.  
+- **Statistics** are **automatically updated** using background jobs.
 
 ---
 
-## ✅ Main Features
+## ✅ **Main Features**
 
-- **Task creation form** with admin & user selection.  
-- **Task listing page** (paginated 10 tasks per page).  
-- **Statistics page** for task counts.  
+- **Task creation form** (Admin, Title, Description, Assigned User).  
+- **Task listing page** (Paginated 10 tasks per page).  
+- **Statistics page** for top users with most tasks.  
 - **Background job** to update statistics.  
-- **Single command** to setup & run the app.  
-- **Database seeder** to generate:  
-  - `100 Admins`  
-  - `10,000 Users`  
+- **Database seeder** to generate:
+  - `100 Admins`
+  - `10,000 Users`
 
 ---
 
-## ⚙️ Installation & Running the App
+## ⚙️ **Installation & Running the App**
 
 ### 1. Clone the Repository
 
@@ -33,88 +35,83 @@ git clone <repository-link>
 cd <project-folder>
 ```
 
+---
+
 ### 2. Configure Environment
 
-- Create `.env` file:  
+- Create `.env` file:
 
 ```bash
 cp .env.example .env
 ```
 
-- Set up your **DB connection** inside `.env`.  
+- Set up your **Database connection** inside `.env`.
 
-### 3. One Command Setup (Migrate, Seed, Queue, Run)
+---
+
+### 3. Run Setup and Tests
+
+#### ✅ **Run the following commands in order:**
 
 ```bash
+# 1. Install dependencies
+composer install
+
+# 2. Setup the application (generate key, migrate, seed, queue worker)
 php artisan app:start
+
+# 3. Run Task feature tests
+php artisan test --filter TaskTest
 ```
 
-This command will:  
-- Install composer dependencies.  
-- Generate application key.  
-- Run migrations & seeder.  
-- Prepare queue table.  
-- Run queue worker.  
-
 ---
 
-## 🧪 Running Tests
-
-Feature tests are included to validate task creation and statistics.  
-
-```bash
-php artisan test --filter TaskTest
-```  
-
----
-
-## 📄 Pages Overview
+## 📄 **Pages Overview**
 
 ### 1. **Task Creation Page**
-- Fields:  
-  - Admin (dropdown)  
-  - Title (text)  
-  - Description (textarea)  
-  - Assigned User (dropdown)  
-
-➡️ Redirect to Task List after creation.  
+- Fields:
+  - Admin (dropdown)
+  - Title (text)
+  - Description (textarea)
+  - Assigned User (dropdown)
+- ➡️ Redirects to task list page after creation.
 
 ---
 
 ### 2. **Task List Page**
-- Shows:  
-  - Title  
-  - Description  
-  - Assigned User Name  
-  - Admin Name  
-- **Pagination: 10 per page**  
+- Shows:
+  - Title
+  - Description
+  - Assigned User Name
+  - Admin Name
+- **Pagination: 10 tasks per page.**
 
 ---
 
 ### 3. **Statistics Page**
-- Shows **Top 10 users** with the highest task counts.  
+- Displays **Top 10 users** with the highest number of tasks assigned.
 
 ---
 
-## 🚀 Important Commands
+## 🚀 **Important Commands Summary**
 
-| Command                                   | Description                                |
-|------------------------------------------|--------------------------------------------|
-| `php artisan app:start`                  | Full setup, migrate, seed, queue, run app  |
-| `php artisan migrate:fresh --seed`       | Reset & seed database                     |
-| `php artisan queue:work`                 | Run queue worker manually                 |
-| `php artisan test --filter TaskTest`    | Run feature tests for tasks               |
+| Command                                     | Description                                    |
+|---------------------------------------------|------------------------------------------------|
+| `composer install`                          | Install required dependencies                  |
+| `php artisan app:start`                     | Full setup: generate key, migrate, seed, queue |
+| `php artisan test --filter TaskTest`        | Run task-related feature tests                 |
 
 ---
 
-## 🛠️ Technologies
+## 🛠️ **Technologies Used**
 
 - Laravel 10+  
 - MySQL  
 - Bootstrap 5 (UI)  
-- Laravel Queue (database driver)  
+- Laravel Queue (Database driver)  
 
 ---
 
-### 🚨 Note:  
-Make sure queue worker is running while creating tasks for real-time statistics update.  
+## ⚠️ **Note**
+
+- Make sure **queue worker** is running while creating tasks to ensure real-time statistics updates.
