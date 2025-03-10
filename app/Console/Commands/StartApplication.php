@@ -6,31 +6,39 @@ use Illuminate\Console\Command;
 
 class StartApplication extends Command
 {
-    // The command signature to run from the terminal
+    // Command signature to run
     protected $signature = 'app:start';
 
-    // A short description of what this command does
-    protected $description = 'Run migrations and start queue worker';
+    // Description of the command
+    protected $description = 'Install dependencies, generate key, run migrations, seed database, and start queue worker';
 
-    // The main function that will be executed when running the command
+    // The main function executed when the command runs
     public function handle()
     {
-        // Welcome message when starting the application
-        $this->info('🚀 Starting the application...');
+        // Start message
+        $this->info('🚀 Starting the application setup...');
 
-        // 1. Run queue:table migration to create the jobs table if it does not exist
+        // 1. Composer install
+        $this->info('📦 Installing composer dependencies...');
+        exec('composer install');
+
+        // 2. Generate application key
+        $this->info('🔑 Generating application key...');
+        $this->call('key:generate');
+
+        // 3. Run queue:table migration
         $this->info('🛠️ Running queue table migration...');
         $this->call('queue:table');
 
-        // 2. Run all migrations (with --force to avoid confirmation in production)
-        $this->info('🔄 Running all migrations...');
-        $this->call('migrate', ['--force' => true]);
+        // 4. Fresh migrate and seed database
+        $this->info('🗄️ Running fresh migrations and seeding database...');
+        $this->call('migrate:fresh', ['--seed' => true, '--force' => true]);
 
-        // 3. Start queue worker to automatically process queued jobs
+        // 5. Start queue worker
         $this->info('⚙️ Starting queue worker...');
         $this->call('queue:work');
 
-        // Final message to confirm that everything is running successfully
+        // Final message
         $this->info('✅ Application is up and running!');
     }
 }
