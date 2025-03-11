@@ -29,9 +29,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="text-center">Task List</h2>
             <div class="d-flex gap-2">
-                <!-- زرار الإحصائيات -->
                 <a href="{{ route('statistics') }}" class="btn btn-success">View Statistics</a>
-                <!-- زرار إضافة مهمة -->
                 <a href="{{ route('tasks.create') }}" class="btn btn-primary">Add New Task</a>
             </div>
         </div>

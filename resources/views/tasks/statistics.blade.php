@@ -28,7 +28,6 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="text-center">Top 10 Users with Most Tasks</h2>
-            <!-- زر الرجوع لقائمة المهام -->
             <a href="{{ route('tasks.index') }}" class="btn btn-primary">Back to Task List</a>
         </div>
 
